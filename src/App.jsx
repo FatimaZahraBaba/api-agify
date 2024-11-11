@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 import './app.scss'
+import search from './search.svg';
 
 function App() {
 
-  let [name, setname] = useState('');
-  let [age, setAge] = useState();
+  const [name, setName] = useState('');
+  const [age, setAge] = useState();
 
-  const changeNamename = (e) => {
-    setname(e.target.name);
+  const changeName = (e) => {
+    setName(e.target.value);
   }
   const getAge = async () => {
     const url = `https://api.agify.io?name=${name}`;
@@ -20,12 +21,19 @@ function App() {
 
   return (
     <>
-   
-      <form action="">
-        <input type="text" value={name} onChange={changeNamename}/>
-      </form>
-      <button onClick={getAge}>CHECK</button>
-      { age ? <h3>{name} a {age} ans</h3> : ''}
+
+    <div className="card">
+      <div className='title'>Estimate the Age of a Name</div>
+      <div className='search'>
+        <form action="">
+          <input type="text" value={name} onChange={changeName}/>
+        </form>
+        <button onClick={getAge}></button>
+      </div>
+      <p>
+        { age ? <span><span className="name">{name}</span> is <span className="age">{age}</span> years old</span> : ''}
+      </p>
+    </div>
 
     </>
   )
